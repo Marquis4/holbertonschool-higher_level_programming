@@ -1,1 +1,1 @@
-read
+python
