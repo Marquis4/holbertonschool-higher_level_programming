@@ -1,18 +1,15 @@
 #!/usr/bin/python3
-"""script that lists all states from the database hbtn_0e_0_usa"""
+'''States listing module'''
 import MySQLdb
-import sys
+from sys import argv
 
 
-if __name__ == '__main__':
-
-    db = MySQLdb.connect(host="localhost", port=3306,
-                         user=sys.argv[1], passwd=sys.argv[2],
-                         db=sys.argv[3], charset="utf8")
-    cr = db.cursor()
-    cr.execute("SELECT * FROM states ORDER BY states.id")
-    res = cr.fetchall()
-    for rows in res:
-        print(rows)
-    cr.close()
+if __name__ == "__main__":
+    db = MySQLdb.connect(host='localhost', user=argv[1], passwd=argv[2],
+                         db=argv[3])
+    st = db.cursor()
+    st.execute("""SELECT `id`, `name` FROM states ORDER BY `id`;""")
+    res = st.fetchall()
+    for i in res:
+        print(i)
     db.close()
